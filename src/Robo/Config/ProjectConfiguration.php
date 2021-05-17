@@ -14,8 +14,8 @@ class ProjectConfiguration implements ConfigurationInterface {
    * Get config tree builder.
    */
   public function getConfigTreeBuilder() {
-    $treeBuilder = new TreeBuilder();
-    $rootNode = $treeBuilder->root('recipe');
+    $treeBuilder = new TreeBuilder('recipe');
+    $rootNode = $treeBuilder->getRootNode();
 
     // @codingStandardsIgnoreStart
     $rootNode
@@ -54,7 +54,7 @@ class ProjectConfiguration implements ConfigurationInterface {
               ->cannotBeEmpty()
               ->defaultValue('pipelines')
               ->validate()
-                ->ifNotInArray(['pipelines', 'travis_ci'])
+                ->ifNotInArray(['pipelines'])
                 ->thenInvalid('Invalid continuous integration provider %s')
               ->end()
             ->end()
